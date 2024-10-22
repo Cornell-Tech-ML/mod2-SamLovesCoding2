@@ -244,10 +244,10 @@ class Permute(Function):
         re_order = [0] * len(list(order.to_numpy()))
         order_int = []
         for idx, val in enumerate(list(order.to_numpy())):
-            re_order[int(val)] = idx  # To undo the new permutation in backward
+            re_order[int(val)] = idx
             order_int.append(int(val))
         ctx.save_for_backward(re_order)
-        return a._new(a._tensor.permute(*order_int))  # Calls permute from TensorData
+        return a._new(a._tensor.permute(*order_int))
 
     @staticmethod
     def backward(ctx: Context, grad_output: Tensor) -> Tuple[Tensor, float]:
